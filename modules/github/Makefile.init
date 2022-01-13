@@ -1,13 +1,20 @@
 GITHUB_TEMPLATES = \
 	.github/PULL_REQUEST_TEMPLATE.md \
+	.github/ISSUE_TEMPLATE/bug_report.md \
+	.github/ISSUE_TEMPLATE/feature_request.md \
+	.github/ISSUE_TEMPLATE/question.md \
 	.github/auto-release.yml \
+	.github/reviewers.yml \
 	.github/workflows/auto-release.yml \
 	.github/workflows/auto-assign-reviewers.yml
 
 # Install extra configuration for terraform projects
 GITHUB_TERRAFORM_TEMPLATES = \
-	.github/workflows/terraform-pull-request-actions.yml
+	.github/workflows/terraform.yml
 
+# Install extra configuration for python projects
+GITHUB_PYTHON_TEMPLATES = \
+	.github/workflows/python.yml
 
 $(GITHUB_TEMPLATES): $(addprefix $(BUILD_HARNESS_PATH)/templates/, $(GITHUB_TEMPLATES))
 	mkdir -p $(dir $@)
@@ -19,7 +26,12 @@ $(GITHUB_TERRAFORM_TEMPLATES): $(addprefix $(BUILD_HARNESS_PATH)/templates/terra
 	cp $(BUILD_HARNESS_PATH)/templates/terraform/$@ $@
 	git ls-files --error-unmatch $@ 2>/dev/null || git add $@
 
-.PHONY: $(GITHUB_TEMPLATES) $(GITHUB_TERRAFORM_TEMPLATES)
+$(GITHUB_PYTHON_TEMPLATES): $(addprefix $(BUILD_HARNESS_PATH)/templates/python/, $(GITHUB_PYTHON_TEMPLATES))
+	mkdir -p $(dir $@)
+	cp $(BUILD_HARNESS_PATH)/templates/python/$@ $@
+	git ls-files --error-unmatch $@ 2>/dev/null || git add $@
+
+.PHONY: $(GITHUB_TEMPLATES) $(GITHUB_TERRAFORM_TEMPLATES) $(GITHUB_PYTHON_TEMPLATES)
 
 ## Initialize GitHub directory with default .github files
-github/init: $(GITHUB_TEMPLATES) $(if $(or $(wildcard *.tf),$(wildcard **/*.tf)),$(GITHUB_TERRAFORM_TEMPLATES))
+github/init: $(GITHUB_TEMPLATES) $(if $(or $(wildcard *.tf),$(wildcard **/*.tf)),$(GITHUB_TERRAFORM_TEMPLATES)) $(if $(or $(wildcard *.py),$(wildcard **/*.py)),$(GITHUB_PYTHON_TEMPLATES))

@@ -50,7 +50,7 @@ jobs:
           TAGS="$TAGS,${{ github.repository }}:latest,${{ github.repository }}:nightly"
           SLIM_TAGS="$SLIM_TAGS,${{ github.repository }}:slim-latest,${{ github.repository }}:slim-nightly"
         fi
-        echo "tags=${TAGS}"" >> $GITHUB_ENV
+        echo "tags=${TAGS}" >> $GITHUB_ENV
         echo "slim-tags=${SLIM_TAGS}" >> $GITHUB_ENV
 
     - name: Set up Docker Buildx
