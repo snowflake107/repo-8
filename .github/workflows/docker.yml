@@ -50,8 +50,12 @@ jobs:
           TAGS="$TAGS,${{ github.repository }}:latest,${{ github.repository }}:nightly"
           SLIM_TAGS="$SLIM_TAGS,${{ github.repository }}:slim-latest,${{ github.repository }}:slim-nightly"
         fi
+        SLIM_TAGS="${SLIM_TAGS,,}"
+        SLIM_TAGS="${SLIM_TAGS//bitdefender/bd}"
+        TAGS="${TAGS,,}"
+        TAGS="${TAGS//bitdefender/bd}"
         echo "tags=${TAGS}" >> $GITHUB_ENV
-        echo "slim-tags=${SLIM_TAGS}" >> $GITHUB_ENV
+        echo "slim-tags=${SLIM_TAGS,,}" >> $GITHUB_ENV
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
