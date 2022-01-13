@@ -29,7 +29,7 @@ RUN apk --update --no-cache add \
       boto==2.49.0 \
       boto3==1.18.28 \
       iteration-utilities==0.11.0 \
-      pre-commit \
+      pre-commit==2.16.0 \
       PyGithub==1.54.1 && \
     git config --global advice.detachedHead false
 

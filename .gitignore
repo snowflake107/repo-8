@@ -3,3 +3,4 @@
 .project
 build-harness.iml
 build-harness/
+**/super-linter.log

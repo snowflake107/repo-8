@@ -25,8 +25,8 @@ If applicable, add screenshots or logs to help explain your problem.
 
 ## Environment (please complete the following information):
 Anything that will help us triage the bug will help. Here are some ideas:
- - OS: [e.g. Linux, OSX, WSL, etc]
- - Version [e.g. 10.15]
+- OS: [e.g. Linux, OSX, WSL, etc]
+- Version [e.g. 10.15]
 
 ## Additional Context
 Add any other context about the problem here.
