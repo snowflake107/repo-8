@@ -52,10 +52,10 @@ It's 100% Open Source and licensed under the [APACHE2](LICENSE).
 At the top of your `Makefile` add, the following...
 
 ```make
--include $(shell fetch --log-level=error --repo=https://github.com/bitdefendermdr/build-harness --source-path=templates/Makefile.build-harness --branch=master .build-harness; echo .build-harness)
+-include $(shell fetch --log-level=error --repo=https://github.com/bitdefendermdr/build-harness --source-path=templates/Makefile.build-harness --branch=master .build-harness 2>/dev/null; echo .build-harness)
 ```
 
-This will download a `Makefile` called `.build-harness` and include it at runtime. We recommend adding the `.build-harness` file to your `.gitignore`.
+This will download a `Makefile` called `.build-harness` and include it at runtime. We recommend adding the `.build-harness` file and `build-harness` directory to your `.gitignore`.
 
 This automatically exposes many new targets that you can leverage throughout your build & CI/CD process.
 
@@ -67,7 +67,7 @@ Run `make readme/init` to create a generic README.yml. Update content with the d
 
 Run `make readme` to build the README.md. **This will overwrite the current README.md if one exists.**
 
-Run `make docs/targets.md` and `make docs/terraform.md` to generate the `targets.md` and `terraform.md`.
+Before committing files, run `make pr/auto-format` to formart files (awk outputs slightly differently in alpine than the real world).
 
 ## Quick Start
 
@@ -115,10 +115,10 @@ Available targets:
   init                                Init build-harness
   make/lint                           Lint all makefiles
   packages/delete                     Delete packages
-  packages/install/%                  Install package (e.g. helm, helmfile, kubectl)
   packages/install                    Install packages
-  packages/reinstall/%                Reinstall package (e.g. helm, helmfile, kubectl)
+  packages/install/%                  Install package (e.g. helm, helmfile, kubectl)
   packages/reinstall                  Reinstall packages
+  packages/reinstall/%                Reinstall package (e.g. helm, helmfile, kubectl)
   packages/uninstall/%                Uninstall package (e.g. helm, helmfile, kubectl)
   readme                              Alias for readme/build
   readme/build                        Create README.md by building it from README.yaml
