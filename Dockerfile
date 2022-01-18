@@ -10,13 +10,16 @@ RUN apk --update --no-cache add \
       ca-certificates \
       coreutils \
       curl \
+      gcc \
       git \
       gettext \
       go \
       grep \
       groff \
       jq \
+      libc-dev \
       libc6-compat \
+      libffi-dev \
       make \
       perl \
       python3-dev \

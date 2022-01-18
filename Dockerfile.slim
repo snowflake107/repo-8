@@ -10,11 +10,14 @@ RUN apk --no-cache add \
       ca-certificates \
       coreutils \
       curl \
+      gcc \
       git \
       gettext \
       grep \
       jq \
+      libc-dev \
       libc6-compat \
+      libffi-dev \
       make
 
 RUN git config --global advice.detachedHead false

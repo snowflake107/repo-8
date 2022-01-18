@@ -4,6 +4,8 @@ FLAKE8_TARGET_PATH ?= $(BUILD_HARNESS_PATH)/vendor/.flake8
 
 ## Install flake8
 flake8/install:
-	@pip install --no-cache-dir --disable-pip-version-check --target $(FLAKE8_TARGET_PATH) flake8==$(FLAKE8_VERSION) && \
+	@python3 -m venv $(CHECKOV_TARGET_PATH) && \
+	source $(CHECKOV_TARGET_PATH)/bin/activate && \
+	pip install --no-cache-dir --disable-pip-version-check --target $(FLAKE8_TARGET_PATH) flake8==$(FLAKE8_VERSION) && \
 	ln -s $(FLAKE8_TARGET_PATH)/bin/flake8 $(FLAKE8)
 	$(FLAKE8) --version
