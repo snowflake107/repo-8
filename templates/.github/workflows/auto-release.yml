@@ -18,7 +18,6 @@ jobs:
       - uses: moneway/release-drafter@feature/calver-tmpl
         with:
           publish: ${{ !contains(steps.get-merged-pull-request.outputs.labels, 'no-release') }}
-          prerelease: false
           config-name: auto-release.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
