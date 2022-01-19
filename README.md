@@ -1,6 +1,6 @@
 
 <!-- markdownlint-disable -->
-# Build Harness [![Build Status](https://github.com/BitdefenderMDR/build-harness/workflows/docker/badge.svg?branch=master)](https://github.com/BitdefenderMDR/build-harness/actions?query=workflow%3Adocker)
+# Build Harness [![Build Status](https://github.com/BitdefenderMDR/build-harness/workflows/docker/badge.svg?branch=master)](https://github.com/BitdefenderMDR/build-harness/actions?query=workflow%3Adocker) [![Lint](https://github.com/BitdefenderMDR/build-harness/workflows/lint/badge.svg?branch=master)](https://github.com/BitdefenderMDR/build-harness/actions?query=workflow%3Alint)
 <!-- markdownlint-restore -->
 
 
@@ -81,6 +81,10 @@ Here's how to get started...
 
 Here is an example:
 - [`terraform-null-label`](https://github.com/cloudposse/terraform-null-label/) - A terraform module that leverages `readme`, `terraform/%` and `docs/%` targets. Some of the `terraform/%` targets were removed and some new targets were added.
+
+### Contributing additional modules
+When you make changes to the repo, ensure you build a new docker image locally `make docker/build` to ensure the image will be successful after the merge.
+In addition to creating the image locally run `make pr/auto-format` to ensure the README.md is up-to-date.
 
 
 
