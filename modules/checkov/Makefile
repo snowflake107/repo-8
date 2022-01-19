@@ -5,11 +5,11 @@ CHECKOV_TARGET_PATH ?= $(BUILD_HARNESS_PATH)/vendor/.checkov
 ## Install checkov
 checkov/install:
 	@[ -x $(CHECKOV) ] || ( \
-		echo "Installing checkov $(CHECKOV_VERSION) ($(OS)) from pip" && \
+		echo "* Installing checkov $(CHECKOV_VERSION) ($(OS)) from pip" && \
 		python3 -m venv $(CHECKOV_TARGET_PATH) && \
 		source $(CHECKOV_TARGET_PATH)/bin/activate && \
 		pip install --no-cache-dir --disable-pip-version-check checkov==$(CHECKOV_VERSION) && \
-		ln -f -s $(CHECKOV_TARGET_PATH)/bin/checkov $(BUILD_HARNESS_PATH)/vendor/ \
+		ln -f -s $(CHECKOV_TARGET_PATH)/bin/checkov $(CHECKOV) \
 	)
 	$(CHECKOV) --version
 
