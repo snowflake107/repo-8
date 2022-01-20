@@ -1,6 +1,6 @@
-CHECKOV ?= $(BUILD_HARNESS_PATH)/vendor/checkov
+CHECKOV ?= $(INSTALL_PATH)/checkov
 CHECKOV_VERSION ?= 2.0.701
-CHECKOV_TARGET_PATH ?= $(BUILD_HARNESS_PATH)/vendor/.checkov
+CHECKOV_TARGET_PATH ?= $(INSTALL_PATH)/.checkov
 
 ## Install checkov
 checkov/install:

@@ -1,6 +1,6 @@
-FLAKE8 ?= $(BUILD_HARNESS_PATH)/vendor/flake8
+FLAKE8 ?= $(INSTALL_PATH)/flake8
 FLAKE8_VERSION ?= 4.0.1
-FLAKE8_TARGET_PATH ?= $(BUILD_HARNESS_PATH)/vendor/.flake8
+FLAKE8_TARGET_PATH ?= $(INSTALL_PATH)/.flake8
 
 ## Install flake8
 flake8/install:
