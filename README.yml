@@ -23,12 +23,12 @@ github_repo: BitdefenderMDR/build-harness
 
 # Badges to display
 badges:
-  - name: "Build Status"
-    image: "https://github.com/BitdefenderMDR/build-harness/workflows/docker/badge.svg?branch=master"
-    url: "https://github.com/BitdefenderMDR/build-harness/actions?query=workflow%3Adocker"
-  - name: "Lint"
-    image: "https://github.com/BitdefenderMDR/build-harness/workflows/lint/badge.svg?branch=master"
-    url: "https://github.com/BitdefenderMDR/build-harness/actions?query=workflow%3Alint"
+  - name: "docker"
+    image: "https://github.com/BitdefenderMDR/build-harness/actions/workflows/docker.yml/badge.svg"
+    url: "https://github.com/BitdefenderMDR/build-harness/actions/workflows/docker.yml"
+  - name: "lint"
+    image: "https://github.com/BitdefenderMDR/build-harness/actions/workflows/lint.yml/badge.svg"
+    url: "https://github.com/BitdefenderMDR/build-harness/actions/workflows/lint.yml"
 
 # List any related terraform modules that this module may be used with or that this module depends on.
 related:
