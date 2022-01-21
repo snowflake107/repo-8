@@ -1,6 +1,6 @@
 
 <!-- markdownlint-disable -->
-# Build Harness [![Build Status](https://github.com/BitdefenderMDR/build-harness/workflows/docker/badge.svg?branch=master)](https://github.com/BitdefenderMDR/build-harness/actions?query=workflow%3Adocker) [![Lint](https://github.com/BitdefenderMDR/build-harness/workflows/lint/badge.svg?branch=master)](https://github.com/BitdefenderMDR/build-harness/actions?query=workflow%3Alint)
+# Build Harness [![docker](https://github.com/BitdefenderMDR/build-harness/actions/workflows/docker.yml/badge.svg)](https://github.com/BitdefenderMDR/build-harness/actions/workflows/docker.yml) [![lint](https://github.com/BitdefenderMDR/build-harness/actions/workflows/lint.yml/badge.svg)](https://github.com/BitdefenderMDR/build-harness/actions/workflows/lint.yml)
 <!-- markdownlint-restore -->
 
 
