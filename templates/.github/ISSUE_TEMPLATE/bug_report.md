@@ -16,9 +16,9 @@ A clear and concise description of what you expected to happen.
 ## Steps to Reproduce:
 Steps to reproduce the behavior:
 1. Go to '...'
-1. Run '....'
-1. Enter '....'
-1. See error
+2. Run '....'
+3. Enter '....'
+4. See error
 
 ## Screenshots:
 If applicable, add screenshots or logs to help explain your problem.
