@@ -98,12 +98,3 @@ quickstart: |-
 include:
   - "docs/targets.md"
 # - "docs/terraform.md"
-
-# # Contributors to this project
-contributors:
-  - name: "Stephen Lewis"
-    github: "slewis-bd"
-  - name: "Michael Humphrey"
-    github: "mleehumphrey-bd"
-  - name: "Sean Tompkins"
-    github: "sptompkins"

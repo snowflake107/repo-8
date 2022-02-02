@@ -177,19 +177,4 @@ In general, PRs are welcome. We follow the typical "shared repository" Git workf
 **NOTE:** Be sure to merge the latest changes from "upstream" before making a pull request!
 
 
-
-### Contributors
-
-<!-- markdownlint-disable -->
-|  [![Stephen Lewis][slewis-bd_avatar]][slewis-bd_homepage]<br/>[Stephen Lewis][slewis-bd_homepage] | [![Michael Humphrey][mleehumphrey-bd_avatar]][mleehumphrey-bd_homepage]<br/>[Michael Humphrey][mleehumphrey-bd_homepage] | [![Sean Tompkins][sptompkins_avatar]][sptompkins_homepage]<br/>[Sean Tompkins][sptompkins_homepage] |
-|---|---|---|
-<!-- markdownlint-restore -->
-
-  [slewis-bd_homepage]: https://github.com/slewis-bd
-  [slewis-bd_avatar]: https://img.cloudposse.com/150x150/https://github.com/slewis-bd.png
-  [mleehumphrey-bd_homepage]: https://github.com/mleehumphrey-bd
-  [mleehumphrey-bd_avatar]: https://img.cloudposse.com/150x150/https://github.com/mleehumphrey-bd.png
-  [sptompkins_homepage]: https://github.com/sptompkins
-  [sptompkins_avatar]: https://img.cloudposse.com/150x150/https://github.com/sptompkins.png
-
 [logo]: https://www.bitdefender.com/etc.clientlibs/bitdefender/clientlibs/clientlib-site/resources/images/aem/black_company_logo.svg
