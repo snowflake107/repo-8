@@ -1,5 +1,6 @@
 TMP ?= /tmp
-TERRAFORM ?= $(BUILD_HARNESS_PATH)/vendor/terraform
+INSTALL_PATH ?= $(BUILD_HARNESS_PATH)/vendor
+TERRAFORM ?= $(INSTALL_PATH)/terraform
 TERRAFORM_VERSION ?= 1.0.11
 TERRAFORM_URL ?= https://releases.hashicorp.com/terraform/$(TERRAFORM_VERSION)/terraform_$(TERRAFORM_VERSION)_$(OS)_$(BUILD_HARNESS_ARCH).zip
 TERRAFORM_TFVARS ?= tfvars

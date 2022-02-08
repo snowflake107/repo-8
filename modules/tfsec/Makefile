@@ -1,4 +1,5 @@
-TFSEC ?= $(BUILD_HARNESS_PATH)/vendor/tfsec
+INSTALL_PATH ?= $(BUILD_HARNESS_PATH)/vendor
+TFSEC ?= $(INSTALL_PATH)/tfsec
 TFSEC_VERSION ?= v0.63.1
 
 ## Install tfsec
