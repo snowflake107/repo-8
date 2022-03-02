@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Generate tfvars path and setup AWS creds
-        if: ${{ github.event.pull_request.sender.login != "ACT" }}
+        if: github.event.pull_request.sender.login != 'ACT'
         run: |
           export GITHUB_REF=${github_ref//\"}
           if [[ "${GITHUB_REF}" == **"test" ]]; then
@@ -39,7 +39,7 @@ jobs:
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
-        if: github.event.pull_request.sender.login != ACT
+        if: github.event.pull_request.sender.login != 'ACT'
         with:
           aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
@@ -89,7 +89,7 @@ jobs:
           args: tf/plan/${STAGE}/${REGION}
 
       - uses: actions/github-script@v5
-        if: github.event.pull_request.sender.login != ACT
+        if: github.event.pull_request.sender.login != 'ACT'
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
         with:
