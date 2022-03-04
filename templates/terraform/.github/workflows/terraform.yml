@@ -95,6 +95,9 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            let plan_b64 = process.env.PLAN;
+            let buff = Buffer.from(plan_b64, "base64");
+            let plan = buff.toString("utf-8");
             const output = `#### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
             #### Terraform Linting 🖌\`${{ steps.lint.outcome }}\`
             #### Terraform Security Analysis 🤖\`${{ steps.sec.outcome }}\`
@@ -103,7 +106,7 @@ jobs:
             <details><summary>Show Plan</summary>
 
             \`\`\`\n
-            ${process.env.PLAN}
+            ${plan}
             \`\`\`
 
             </details>
