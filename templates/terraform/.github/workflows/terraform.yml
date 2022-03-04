@@ -15,18 +15,21 @@ jobs:
           export GITHUB_REF=${github_ref//\"}
           if [[ "${GITHUB_REF}" == **"test" ]]; then
             echo "STAGE=test" >> $GITHUB_ENV
+            echo "REGION=${{ secrets.AWS_TEST_REGION }}" >> $GITHUB_ENV
             echo "AWS_REGION=${{ secrets.AWS_TEST_REGION }}" >> $GITHUB_ENV
             echo "AWS_SECRET_ACCESS_KEY=${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
             echo "AWS_ACCESS_KEY_ID=${{ secrets.TEST_AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
             echo "AWS_ROLE_TO_ASSUME=${{ secrets.TEST_AWS_ROLE_TO_ASSUME }}" >> $GITHUB_ENV
           elif [[ "${GITHUB_REF}" == **"dev" ]]; then
             echo "STAGE=dev" >> $GITHUB_ENV
+            echo "REGION=${{ secrets.AWS_DEV_REGION }}" >> $GITHUB_ENV
             echo "AWS_REGION=${{ secrets.AWS_DEV_REGION }}" >> $GITHUB_ENV
             echo "AWS_SECRET_ACCESS_KEY=${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
             echo "AWS_ACCESS_KEY_ID=${{ secrets.DEV_AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
             echo "AWS_ROLE_TO_ASSUME=${{ secrets.DEV_AWS_ROLE_TO_ASSUME }}" >> $GITHUB_ENV
           elif [[ "${GITHUB_REF}" == **"master" ]]; then
             echo "STAGE=prod" >> $GITHUB_ENV
+            echo "REGION=${{ secrets.AWS_PROD_REGION }}" >> $GITHUB_ENV
             echo "AWS_REGION=${{ secrets.AWS_PROD_REGION }}" >> $GITHUB_ENV
             echo "AWS_SECRET_ACCESS_KEY=${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
             echo "AWS_ACCESS_KEY_ID=${{ secrets.PROD_AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
