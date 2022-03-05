@@ -52,6 +52,16 @@ jobs:
 
       - name: Checkout source code
         uses: actions/checkout@v2
+      
+      - name: Global Repo Check
+        run: |
+          if [ -d "tfvars/${STAGE}/global" ]; then
+            echo "Global Repo Detected"
+            echo "REGION_PATH=global" >> $GITHUB_ENV
+          else 
+            echo "Regional Repo Detected"
+            echo "REGION_PATH=${REGION}" >> GITHUB_ENV
+          fi
 
       - name: Terraform Setup
         uses: bitdefendermdr/build-harness@master
@@ -65,7 +75,7 @@ jobs:
         uses: bitdefendermdr/build-harness@master
         with:
           entrypoint: /usr/bin/make
-          args: tf/init/${STAGE}/${REGION}
+          args: tf/init/${STAGE}/${REGION_PATH}
 
       - name: Terraform Linting
         id: lint
@@ -89,7 +99,7 @@ jobs:
         uses: bitdefendermdr/build-harness@master
         with:
           entrypoint: /usr/bin/make
-          args: tf/plan/${STAGE}/${REGION}
+          args: tf/plan/${STAGE}/${REGION_PATH}
 
       - uses: actions/github-script@v5
         if: github.event.pull_request.sender.login != 'ACT'
@@ -98,9 +108,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            let plan_b64 = process.env.PLAN;
-            let buff = Buffer.from(plan_b64, "base64");
-            let plan = buff.toString("utf-8");
             const output = `#### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
             #### Terraform Linting 🖌\`${{ steps.lint.outcome }}\`
             #### Terraform Security Analysis 🤖\`${{ steps.sec.outcome }}\`
@@ -109,7 +116,7 @@ jobs:
             <details><summary>Show Plan</summary>
 
             \`\`\`\n
-            ${plan}
+            ${process.env.PLAN}
             \`\`\`
 
             </details>
