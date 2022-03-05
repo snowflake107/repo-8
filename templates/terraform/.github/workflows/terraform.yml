@@ -60,7 +60,7 @@ jobs:
             echo "REGION_PATH=global" >> $GITHUB_ENV
           else 
             echo "Regional Repo Detected"
-            echo "REGION_PATH=${REGION}" >> GITHUB_ENV
+            echo "REGION_PATH=${{ secrets.AWS_TEST_REGION }}" >> $GITHUB_ENV
           fi
 
       - name: Terraform Setup
