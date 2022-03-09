@@ -57,10 +57,7 @@ jobs:
         run: |
           if [ -d "tfvars/${STAGE}/global" ]; then
             echo "Global Repo Detected"
-            echo "REGION_PATH=global" >> $GITHUB_ENV
-          else 
-            echo "Regional Repo Detected"
-            echo "REGION_PATH=${{ secrets.AWS_TEST_REGION }}" >> $GITHUB_ENV
+            echo "REGION=global" >> $GITHUB_ENV
           fi
 
       - name: Terraform Setup
@@ -75,7 +72,7 @@ jobs:
         uses: bitdefendermdr/build-harness@master
         with:
           entrypoint: /usr/bin/make
-          args: tf/init/${STAGE}/${REGION_PATH}
+          args: tf/init/${STAGE}/${REGION}
 
       - name: Terraform Linting
         id: lint
@@ -99,12 +96,34 @@ jobs:
         uses: bitdefendermdr/build-harness@master
         with:
           entrypoint: /usr/bin/make
-          args: tf/plan/${STAGE}/${REGION_PATH}
+          args: tf/plan/${STAGE}/${REGION}
+
+      - name: Terraform Show
+        id: show
+        continue-on-error: true
+        uses: bitdefendermdr/build-harness@master
+        with:
+          entrypoint: /usr/bin/make
+          args: tf/show/${STAGE}/${REGION}
+
+      - name: Show Path
+        id: showpath
+        run: |
+          if [ -d "infra" ]; then
+            echo "infra directory detected"
+            echo "FILEPATH=./infra/tf-${STAGE}-${REGION}.show" >> $GITHUB_ENV
+          else
+            echo "FILEPATH=./tf-${STAGE}-${REGION}.show" >> $GITHUB_ENV
+          fi
+
+      - name: Set output for show
+        id: showoutput
+        run: echo "::set-output name=plan::$(base64 -w0 < ${FILEPATH})"
 
       - uses: actions/github-script@v5
         if: github.event.pull_request.sender.login != 'ACT'
         env:
-          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+          PLAN: "${{ steps.showoutput.outputs.plan }}"
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
