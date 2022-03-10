@@ -52,6 +52,13 @@ jobs:
 
       - name: Checkout source code
         uses: actions/checkout@v2
+      
+      - name: Global Repo Check
+        run: |
+          if [ -d "tfvars/${STAGE}/global" ]; then
+            echo "Global Repo Detected"
+            echo "REGION=global" >> $GITHUB_ENV
+          fi
 
       - name: Terraform Setup
         uses: bitdefendermdr/build-harness@master
@@ -91,10 +98,32 @@ jobs:
           entrypoint: /usr/bin/make
           args: tf/plan/${STAGE}/${REGION}
 
+      - name: Terraform Show
+        id: show
+        continue-on-error: true
+        uses: bitdefendermdr/build-harness@master
+        with:
+          entrypoint: /usr/bin/make
+          args: tf/show/${STAGE}/${REGION}
+
+      - name: Show Path
+        id: showpath
+        run: |
+          if [ -d "infra" ]; then
+            echo "infra directory detected"
+            echo "FILEPATH=./infra/tf-${STAGE}-${REGION}.show" >> $GITHUB_ENV
+          else
+            echo "FILEPATH=./tf-${STAGE}-${REGION}.show" >> $GITHUB_ENV
+          fi
+
+      - name: Set output for show
+        id: showoutput
+        run: echo "::set-output name=plan::$(base64 -w0 < ${FILEPATH})"
+
       - uses: actions/github-script@v5
         if: github.event.pull_request.sender.login != 'ACT'
         env:
-          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+          PLAN: "${{ steps.showoutput.outputs.plan }}"
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
