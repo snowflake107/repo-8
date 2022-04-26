@@ -113,6 +113,7 @@ Available targets:
   flake8/install                      Install flake8
   git/export                          Export git vars
   github/init                         Initialize GitHub directory with default .github files
+  github/vendor                       Create the vendor directory and add gitignore
   help                                Help screen
   help/all                            Display help for all targets
   help/short                          This help short screen
