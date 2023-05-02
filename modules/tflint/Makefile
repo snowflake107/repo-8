@@ -1,6 +1,6 @@
 INSTALL_PATH ?= $(BUILD_HARNESS_PATH)/vendor
 TFLINT ?= $(INSTALL_PATH)/tflint
-TFLINT_VERSION ?= 0.34.1
+TFLINT_VERSION ?= 0.46.1
 
 ## Install tflint
 tflint/install: packages/install/tflint
