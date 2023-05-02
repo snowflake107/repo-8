@@ -173,7 +173,7 @@ In general, PRs are welcome. We follow the typical "shared repository" Git workf
 1. **Create** a feature branch
 1. **Commit** changes to branch
 1. **Push** your work back up to the feature branch
-1. Submit a **Pull Request** to **test** then **dev** finally to **master/main** so that we can review your changes
+1. Submit a **Pull Request** to **master/main** so that we can review your changes
 
 **NOTE:** Be sure to merge the latest changes from "upstream" before making a pull request!
 
