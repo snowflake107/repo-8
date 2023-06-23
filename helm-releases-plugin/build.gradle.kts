@@ -4,6 +4,7 @@ plugins {
     id("com.gradle.plugin-publish")
     id("org.jetbrains.dokka")
     id("maven-publish")
+    alias(libs.plugins.binaryCompatibilityValidator)
 }
 
 
@@ -11,26 +12,17 @@ dependencies {
 
     implementation(project(":helm-plugin"))
 
-    implementation("org.unbroken-dome.gradle-plugin-utils:gradle-plugin-utils:0.5.0")
-    testImplementation("org.unbroken-dome.gradle-plugin-utils:gradle-plugin-test-utils:0.5.0")
+    implementation(libs.unbrokenDomePluginUtils)
+    testImplementation(libs.unbrokenDomeTestUtils)
 }
 
 
 gradlePlugin {
-
     plugins {
         create("helmReleasesPlugin") {
-            id = "org.unbroken-dome.helm-releases"
-            implementationClass = "org.unbrokendome.gradle.plugins.helm.release.HelmReleasesPlugin"
-        }
-    }
-}
-
-
-pluginBundle {
-    (plugins) {
-        "helmReleasesPlugin" {
+            id = "com.citi.helm-releases"
             displayName = "Helm Releases Plugin"
+            implementationClass = "com.citi.gradle.plugins.helm.release.HelmReleasesPlugin"
         }
     }
 }

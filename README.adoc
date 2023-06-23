@@ -7,14 +7,12 @@ ifdef::env-github[]
 endif::[]
 
 = Gradle Helm Plugin
-:version: 1.7.0
-:pluginId: org.unbroken-dome.helm
+:version: 2.0.0
+:pluginId: com.citi.helm
 
 image:https://img.shields.io/gradle-plugin-portal/v/{pluginId}?versionPrefix={version}[link=https://plugins.gradle.org/plugin/{pluginId}/{version}]
 
 This is a suite of Gradle plugins for building, publishing and managing https://www.helm.sh/[Helm] charts.
-
-NOTE: Starting with version 1.0.0, the plugins require Helm 3.+.
 
 
 == Features
@@ -28,7 +26,7 @@ NOTE: Starting with version 1.0.0, the plugins require Helm 3.+.
 
 == Requirements
 
-* Gradle 5.2 or higher
+* Gradle 7 or higher
 * JDK 1.8 or higher (for running Gradle)
 * Helm command-line client 3.+
 
@@ -72,5 +70,5 @@ Use the `helmPackage` task to build your chart.
 
 == Further Documentation
 
-* https://unbroken-dome.github.io/projects/gradle-helm-plugin/[User Manual]
-* https://unbroken-dome.github.io/projects/gradle-helm-plugin/dokka/gradle-helm-plugin/[API/DSL Documentation]
+* https://citi.github.io/projects/gradle-helm-plugin/[User Manual]
+* https://citi.github.io/projects/gradle-helm-plugin/dokka/gradle-helm-plugin/[API/DSL Documentation]

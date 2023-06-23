@@ -1,8 +1,9 @@
 plugins {
     kotlin("jvm") apply false
-    id("com.gradle.plugin-publish") version "0.12.0" apply false
-    id("org.jetbrains.dokka") version "1.4.32"
-    id("org.asciidoctor.jvm.convert") version "3.2.0"
+    alias(libs.plugins.gradlePublish) apply false
+    id("org.jetbrains.dokka") version embeddedKotlinVersion
+    alias(libs.plugins.asciidoctor)
+    alias(libs.plugins.benManesVersions)
 }
 
 
@@ -14,10 +15,9 @@ allprojects {
 
 
 subprojects {
-
     plugins.withType<JavaGradlePluginPlugin> {
         dependencies {
-            "compileOnly"(kotlin("stdlib-jdk8"))
+            "compileOnly"(kotlin("stdlib"))
         }
 
         with(the<GradlePluginDevelopmentExtension>()) {
@@ -32,7 +32,6 @@ subprojects {
 
 
     plugins.withId("org.jetbrains.kotlin.jvm") {
-
         configurations.all {
             resolutionStrategy.eachDependency {
                 if (requested.group == "org.jetbrains.kotlin") {
@@ -42,18 +41,22 @@ subprojects {
         }
 
         dependencies {
-            "testImplementation"(kotlin("stdlib-jdk8"))
+            "testImplementation"(kotlin("stdlib"))
             "testImplementation"(kotlin("reflect"))
 
-            "testImplementation"("com.willowtreeapps.assertk:assertk-jvm:0.23")
-            "testImplementation"("io.mockk:mockk:1.10.0")
-            "testImplementation"("org.spekframework.spek2:spek-dsl-jvm:2.0.9")
-            "testRuntimeOnly"("org.spekframework.spek2:spek-runner-junit5:2.0.9")
+            "testImplementation"(libs.assertk)
+            "testImplementation"(libs.mockk)
+            "testImplementation"(libs.spekDsl)
+            "testRuntimeOnly"(libs.spekRunner)
         }
 
         tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
             kotlinOptions.jvmTarget = "1.8"
-            kotlinOptions.freeCompilerArgs = listOf("-Xjvm-default=enable")
+        }
+
+        tasks.withType<JavaCompile> {
+            sourceCompatibility = "1.8"
+            targetCompatibility = "1.8"
         }
 
         tasks.withType<Test> {
@@ -77,17 +80,27 @@ subprojects {
         }
     }
 
+    plugins.withId("org.jetbrains.kotlinx.binary-compatibility-validator") {
+        tasks.build.configure {
+            dependsOn(tasks.named("apiCheck"))
+        }
+    }
 
     plugins.withId("org.jetbrains.dokka") {
 
         dependencies {
-            "dokkaJavadocPlugin"("org.jetbrains.dokka:kotlin-as-java-plugin:1.4.32")
+            "dokkaJavadocPlugin"("org.jetbrains.dokka:kotlin-as-java-plugin:$embeddedKotlinVersion")
         }
 
-        tasks.withType<Jar>().matching { it.name == "javadocJar" || it.name == "publishPluginJavaDocsJar" }
-            .all {
-                from(tasks.named("dokkaJavadoc"))
-            }
+        // have an option to disable Dokka task for local builds
+        if (project.findProperty("com.citi.gradle.helm.plugin.dokka.disabled") == "true") {
+            logger.info("Dokka tasks are disabled")
+        } else {
+            tasks.withType<Jar>().matching { it.name == "javadocJar" || it.name == "publishPluginJavaDocsJar" }
+                .all {
+                    from(tasks.named("dokkaJavadoc"))
+                }
+        }
 
         tasks.withType<org.jetbrains.dokka.gradle.DokkaTask> {
             dokkaSourceSets.all {
@@ -123,17 +136,16 @@ subprojects {
         }
     }
 
-
     plugins.withId("com.gradle.plugin-publish") {
-
         val githubUrl = project.extra["github.url"] as String
 
-        with(the<com.gradle.publish.PluginBundleExtension>()) {
-
-            website = githubUrl
-            vcsUrl = githubUrl
+        with(the<GradlePluginDevelopmentExtension>()) {
+            website.set("https://citi.github.io/projects/gradle-helm-plugin/")
+            vcsUrl.set(githubUrl)
             description = "A suite of Gradle plugins for building, publishing and managing Helm charts."
-            tags = listOf("helm")
+            plugins.forEach {plugin ->
+                plugin.tags.add("helm")
+            }
         }
     }
 }
@@ -142,7 +154,7 @@ subprojects {
 val asciidoctorExt: Configuration by configurations.creating
 
 dependencies {
-    asciidoctorExt("com.bmuschko:asciidoctorj-tabbed-code-extension:0.3")
+    asciidoctorExt(libs.tabbedCodeExtension)
 }
 
 

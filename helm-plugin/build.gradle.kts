@@ -4,48 +4,42 @@ plugins {
     id("com.gradle.plugin-publish")
     id("org.jetbrains.dokka")
     id("maven-publish")
+    alias(libs.plugins.binaryCompatibilityValidator)
 }
 
 
 dependencies {
 
-    implementation("org.yaml:snakeyaml:1.27")
-    implementation("org.json:json:20200518")
+    implementation(libs.snakeyaml)
+    implementation(libs.orgJson)
 
-    implementation("org.unbroken-dome.gradle-plugin-utils:gradle-plugin-utils:0.5.0")
+    implementation(libs.unbrokenDomePluginUtils)
 
-    testImplementation("com.jayway.jsonpath:json-path:2.4.0")
-    testImplementation("com.fasterxml.jackson.core:jackson-databind:2.11.2")
-    testImplementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.11.2")
+    testImplementation(libs.jsonPath)
+    testImplementation(libs.jacksonDataBind)
+    testImplementation(libs.jacksonDataFormatYaml)
 
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.0")
+    testImplementation(libs.okHttpMockWebServer)
 
-    testImplementation("org.unbroken-dome.gradle-plugin-utils:gradle-plugin-test-utils:0.5.0")
+    testImplementation(libs.unbrokenDomeTestUtils)
 }
 
 
 gradlePlugin {
-
     plugins {
         create("helmCommandsPlugin") {
-            id = "org.unbroken-dome.helm-commands"
-            implementationClass = "org.unbrokendome.gradle.plugins.helm.command.HelmCommandsPlugin"
+            id = "com.citi.helm-commands"
+            displayName = "Helm Commands plugin"
+            implementationClass = "com.citi.gradle.plugins.helm.command.HelmCommandsPlugin"
         }
         create("helmPlugin") {
-            id = "org.unbroken-dome.helm"
-            implementationClass = "org.unbrokendome.gradle.plugins.helm.HelmPlugin"
+            id = "com.citi.helm"
+            displayName = "Helm plugin"
+            implementationClass = "com.citi.gradle.plugins.helm.HelmPlugin"
         }
     }
 }
 
-
-pluginBundle {
-    (plugins) {
-        "helmCommandsPlugin" {
-            displayName = "Helm Commands plugin"
-        }
-        "helmPlugin" {
-            displayName = "Helm plugin"
-        }
-    }
+apiValidation {
+    ignoredPackages.add("com.citi.gradle.plugins.helm.dsl.internal")
 }
