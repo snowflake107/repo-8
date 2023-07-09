@@ -132,6 +132,34 @@ public class ConfigurationAsCodeTest {
     }
 
     @Test
+    @ConfiguredWithCode("WindowsJNLPData.yml")
+    public void testWindowsJNLPData() throws Exception {
+        final AmazonEC2Cloud ec2Cloud = (AmazonEC2Cloud) Jenkins.get().getCloud("development");
+        assertNotNull(ec2Cloud);
+        assertTrue(ec2Cloud.isUseInstanceProfileForCredentials());
+
+        final List<SlaveTemplate> templates = ec2Cloud.getTemplates();
+        assertEquals(1, templates.size());
+        final SlaveTemplate slaveTemplate = templates.get(0);
+        assertEquals("ami-abc123", slaveTemplate.getAmi());
+        assertEquals("C:/jenkins", slaveTemplate.remoteFS);
+
+        assertEquals("windows vs2019", slaveTemplate.getLabelString());
+        assertEquals(2, slaveTemplate.getLabelSet().size());
+
+        assertTrue(ec2Cloud.canProvision(new LabelAtom("windows")));
+        assertTrue(ec2Cloud.canProvision(new LabelAtom("vs2019")));
+
+        final AMITypeData amiType = slaveTemplate.getAmiType();
+        assertFalse(amiType.isUnix());
+        assertTrue(amiType.isWindows());
+        assertTrue(amiType instanceof WindowsJNLPData);
+        final WindowsJNLPData windowsData = (WindowsJNLPData) amiType;
+        assertEquals("180", windowsData.getBootDelay());
+        assertEquals("jenkins-agent.bob.com:", windowsData.getTunnel());
+    }
+
+    @Test
     @ConfiguredWithCode("BackwardsCompatibleConnectionStrategy.yml")
     public void testBackwardsCompatibleConnectionStrategy() throws Exception {
         final AmazonEC2Cloud ec2Cloud = (AmazonEC2Cloud) Jenkins.get().getCloud("us-east-1");

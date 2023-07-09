@@ -5,6 +5,7 @@ import hudson.model.Descriptor.FormException;
 import hudson.model.Computer;
 import hudson.model.Node;
 import hudson.plugins.ec2.ssh.EC2UnixLauncher;
+import hudson.plugins.ec2.win.EC2WindowsJNLPLauncher;
 import hudson.plugins.ec2.win.EC2WindowsLauncher;
 import hudson.plugins.ec2.ssh.EC2MacLauncher;
 import hudson.slaves.NodeProperty;
@@ -70,7 +71,7 @@ public class EC2OndemandSlave extends EC2AbstractSlave {
                             Boolean metadataEndpointEnabled, Boolean metadataTokensRequired, Integer metadataHopsLimit)
             throws FormException, IOException {
 
-        super(name, instanceId, templateDescription, remoteFS, numExecutors, mode, labelString, (amiType.isWindows() ? new EC2WindowsLauncher() : (amiType.isMac() ? new EC2MacLauncher():
+        super(name, instanceId, templateDescription, remoteFS, numExecutors, mode, labelString, (amiType.isWindows() ? amiType instanceof WindowsJNLPData ? new EC2WindowsJNLPLauncher((WindowsJNLPData) amiType) : new EC2WindowsLauncher() : (amiType.isMac() ? new EC2MacLauncher():
                 new EC2UnixLauncher())), new EC2RetentionStrategy(idleTerminationMinutes), initScript, tmpDir, nodeProperties, remoteAdmin, javaPath, jvmopts, stopOnTerminate, idleTerminationMinutes, tags, cloudName, launchTimeout, amiType, connectionStrategy, maxTotalUses, tenancy, metadataEndpointEnabled, metadataTokensRequired, metadataHopsLimit);
 
         this.publicDNS = publicDNS;
