@@ -11,7 +11,7 @@
  */
 
 module.exports = {
-  pathPrefix: process.env.PATH_PREFIX || '/testRedoclyLink/',
+  pathPrefix: process.env.PATH_PREFIX || '/testredoclylink/',
   siteMetadata: {
     pages: [
       {
