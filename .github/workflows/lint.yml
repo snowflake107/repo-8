@@ -1,3 +1,4 @@
+---
 name: lint
 
 on:
@@ -14,9 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@master
+        uses: actions/checkout@main
 
       - name: README lint
+        # Cannot point to current ref (e.g. ${{ github.ref }}),
+        # See https://github.com/orgs/community/discussions/25246
         uses: bitdefendermdr/build-harness@master
         with:
           entrypoint: /usr/bin/make
