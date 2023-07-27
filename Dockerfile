@@ -27,12 +27,12 @@ RUN apk --update --no-cache add \
       py3-ruamel.yaml && \
     python3 -m pip install --upgrade pip setuptools wheel && \
     pip3 install --no-cache-dir \
-      PyYAML==5.4.1 \
-      awscli==1.20.28 \
+      cryptography==41.0.2 \
+      awscli==1.29.9 \
       boto==2.49.0 \
-      boto3==1.18.28 \
+      boto3==1.28.9 \
       iteration-utilities==0.11.0 \
-      PyGithub==1.54.1 && \
+      PyGithub==1.59 && \
     git config --global advice.detachedHead false
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
