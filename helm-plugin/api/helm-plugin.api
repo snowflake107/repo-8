@@ -377,6 +377,7 @@ public final class com/citi/gradle/plugins/helm/command/internal/HelmValueOption
 }
 
 public final class com/citi/gradle/plugins/helm/command/internal/HelmValueOptionsHolder : com/citi/gradle/plugins/helm/command/ConfigurableHelmValueOptions {
+	public fun <init> (Lorg/gradle/api/model/ObjectFactory;)V
 	public fun <init> (Lorg/gradle/api/model/ObjectFactory;Lorg/gradle/api/file/ProjectLayout;)V
 	public fun <init> (Lorg/gradle/api/provider/MapProperty;Lorg/gradle/api/provider/MapProperty;Lorg/gradle/api/file/ConfigurableFileCollection;)V
 	public final fun component1 ()Lorg/gradle/api/provider/MapProperty;

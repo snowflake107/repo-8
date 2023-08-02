@@ -13,6 +13,7 @@ import com.citi.gradle.plugins.helm.command.ConfigurableHelmValueOptions
 import com.citi.gradle.plugins.helm.command.HelmExecSpec
 import com.citi.gradle.plugins.helm.command.HelmOptions
 import com.citi.gradle.plugins.helm.command.HelmValueOptions
+import org.gradle.api.file.ProjectLayout
 import org.unbrokendome.gradle.pluginutils.mapProperty
 
 
@@ -21,6 +22,13 @@ data class HelmValueOptionsHolder(
     override val fileValues: MapProperty<String, Any>,
     override val valueFiles: ConfigurableFileCollection
 ) : ConfigurableHelmValueOptions {
+
+    /**
+     * We don't need second parameter anymore. So, we keep backward compatibility in jars, however disallow to compile code with old styled constructor
+     */
+    @Suppress("UNUSED_PARAMETER", "unused")
+    @PublishedApi
+    internal constructor(objects: ObjectFactory, unused: ProjectLayout) : this(objects)
 
     constructor(objects: ObjectFactory) : this(
         values = objects.mapProperty(),
