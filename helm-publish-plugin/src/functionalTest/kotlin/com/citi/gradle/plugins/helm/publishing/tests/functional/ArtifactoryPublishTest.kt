@@ -7,6 +7,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import java.io.File
 import java.net.HttpURLConnection
+import kotlin.io.path.Path
 import okhttp3.mockwebserver.MockResponse
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -40,7 +41,8 @@ internal class ArtifactoryPublishTest {
     fun helmPublishShouldCallArtifactoryWithCredentials(parameters: DefaultGradleRunnerParameters) {
         // given
         val destinationChartArchive =
-            File(testProjectDir, "build\\helm\\charts\\${testProjectDir.name}-unspecified.tgz")
+            Path(testProjectDir.path, "build", "helm", "charts", "${testProjectDir.name}-unspecified.tgz")
+                .toFile()
         val helmExecutableParameter =
             HelmExecutable.getExecutableParameterForChartCreation(testProjectDir, destinationChartArchive)
 
