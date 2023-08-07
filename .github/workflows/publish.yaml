@@ -51,4 +51,4 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           gradle-home-cache-cleanup: true
-          arguments: publishPlugins -Pgradle.publish.key=${{ inputs.gradle_org_publication_key }} -Pgradle.publish.secret=${{ inputs.gradle_org_publication_secret }}
+          arguments: publishPlugins -Pgradle.publish.key=${{ inputs.gradle_org_publication_key }} -Pgradle.publish.secret=${{ inputs.gradle_org_publication_secret }} --stacktrace
