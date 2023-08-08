@@ -27,6 +27,8 @@ Project has tests, based on two frameworks:
 
 Both frameworks use JUnit test runner, therefore `./gradlew test` covers all unit tests.
 
+See also [#6](https://github.com/Citi/gradle-helm-plugin/issues/6)
+
 ## Functional tests
 
 Please read [Gradle advices first](https://docs.gradle.org/current/userguide/testing_gradle_plugins.html) about the test
