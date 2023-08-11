@@ -1,7 +1,7 @@
 plugins {
-    kotlin("jvm") apply false
+    alias(libs.plugins.kotlinJvm) apply false
     alias(libs.plugins.gradlePublish) apply false
-    id("org.jetbrains.dokka") version embeddedKotlinVersion
+    alias(libs.plugins.dokka)
     alias(libs.plugins.asciidoctor)
     alias(libs.plugins.benManesVersions)
 }
@@ -15,6 +15,12 @@ allprojects {
 
 
 subprojects {
+    plugins.withId("io.gitlab.arturbosch.detekt") {
+        tasks.build.configure {
+            dependsOn(tasks.named("detekt"))
+        }
+    }
+
     plugins.withType<JavaGradlePluginPlugin> {
         dependencies {
             "compileOnly"(kotlin("stdlib"))
@@ -35,7 +41,7 @@ subprojects {
         configurations.all {
             resolutionStrategy.eachDependency {
                 if (requested.group == "org.jetbrains.kotlin") {
-                    useVersion(embeddedKotlinVersion)
+                    useVersion(libs.versions.kotlin.get())
                 }
             }
         }

@@ -15,7 +15,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
+        # Mac OS and Windows are turned off: https://github.com/Citi/gradle-helm-plugin/issues/5
+        os: [ ubuntu-latest ]
         jdk: [ 8, 11, 17 ]
     runs-on: ${{ matrix.os }}
     steps:
@@ -39,4 +40,4 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           gradle-home-cache-cleanup: true
-          arguments: build
+          arguments: build --stacktrace --info

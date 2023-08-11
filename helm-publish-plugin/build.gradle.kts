@@ -4,9 +4,11 @@ plugins {
     id("com.gradle.plugin-publish")
     id("org.jetbrains.dokka")
     id("maven-publish")
+    alias(libs.plugins.detekt)
     alias(libs.plugins.binaryCompatibilityValidator)
 }
 
+val functionalTest by sourceSets.creating
 
 dependencies {
 
@@ -24,10 +26,14 @@ dependencies {
     implementation(libs.unbrokenDomePluginUtils)
 
     testImplementation(libs.unbrokenDomeTestUtils)
+
+    "functionalTestImplementation"(project(":plugin-test-utils"))
+    "functionalTestImplementation"(libs.okHttpMockWebServer)
 }
 
 
 gradlePlugin {
+    testSourceSets(functionalTest)
     plugins {
         create("helmPublishPlugin") {
             id = "com.citi.helm-publish"
@@ -38,4 +44,21 @@ gradlePlugin {
 
 apiValidation {
     ignoredPackages.add("com.citi.gradle.plugins.helm.publishing.dsl.internal")
+}
+
+val functionalTestTask = tasks.register<Test>("functionalTest") {
+    description = "Runs the integration tests."
+    group = "verification"
+    testClassesDirs = functionalTest.output.classesDirs
+    classpath = functionalTest.runtimeClasspath
+    mustRunAfter(tasks.test)
+
+    val urlOverrideProperty = "com.citi.gradle.helm.plugin.distribution.url.prefix"
+    findProperty(urlOverrideProperty)?.let { urlOverride ->
+        systemProperty(urlOverrideProperty, urlOverride)
+    }
+}
+
+tasks.build {
+    dependsOn(functionalTestTask)
 }

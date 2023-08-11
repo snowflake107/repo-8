@@ -4,6 +4,7 @@ plugins {
     id("com.gradle.plugin-publish")
     id("org.jetbrains.dokka")
     id("maven-publish")
+    alias(libs.plugins.detekt)
     alias(libs.plugins.binaryCompatibilityValidator)
 }
 
@@ -22,6 +23,8 @@ dependencies {
     testImplementation(libs.okHttpMockWebServer)
 
     testImplementation(libs.unbrokenDomeTestUtils)
+    testImplementation(libs.bundles.defaultTests)
+    testRuntimeOnly(libs.junitEngine)
 }
 
 

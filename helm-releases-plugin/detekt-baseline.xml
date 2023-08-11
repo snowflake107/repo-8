@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ThrowsCount:TagExpressionParser.kt$TagExpressionParser$private fun reduceBinaryExpression( tokens: List&lt;Token>, operatorToken: ScanToken, combiner: BinaryOperator&lt;TagExpression> ): List&lt;Token>?</ID>
+    <ID>TooManyFunctions:HelmRelease.kt$HelmReleaseProperties : NamedConfigurableHelmInstallFromRepositoryOptionsConfigurableHelmValueOptions</ID>
+  </CurrentIssues>
+</SmellBaseline>

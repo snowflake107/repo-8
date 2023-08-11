@@ -10,6 +10,7 @@ import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import com.citi.gradle.plugins.helm.command.HelmDownloadClientPlugin
+import com.citi.gradle.plugins.helm.command.internal.deleteFileOnException
 import com.citi.gradle.plugins.helm.util.calculateDigestHex
 import com.citi.gradle.plugins.helm.util.formatDataSize
 import org.unbrokendome.gradle.pluginutils.SystemUtils
@@ -27,7 +28,11 @@ import java.net.URI
 abstract class HelmDownloadClientPackage : DefaultTask() {
 
     companion object {
-
+        /**
+         * 1.02 == 102%
+         * 0.3 == 30%
+         */
+        private const val percentRatio = 100
         private const val BufferSize = 10 * 1024
         private const val ConnectTimeoutMilliseconds = 30 * 1000
         private const val ReadTimeoutMilliseconds = 30 * 1000
@@ -154,7 +159,6 @@ abstract class HelmDownloadClientPackage : DefaultTask() {
 
     @TaskAction
     fun downloadClientPackage() {
-
         val sha256SumFile = project.file(sha256SumFile)
         val targetFile = project.file(outputFile)
 
@@ -163,30 +167,21 @@ abstract class HelmDownloadClientPackage : DefaultTask() {
 
         downloadSha256SumFile(sha256SumFile)
 
-        try {
-            val expectedDigest = readSha256DigestFromFile()
+        deleteFileOnException(sha256SumFile, logger) {
+            deleteFileOnException(targetFile, logger) {
+                val expectedDigest = readSha256DigestFromFile()
 
-            // If the target file already exists and matches then we don't need to download it again
-            if (verifySha256Digest(expectedDigest, project.file(outputFile))) {
-                return
+                // If the target file already exists and matches then we don't need to download it again
+                if (verifySha256Digest(expectedDigest, project.file(outputFile))) {
+                    return
+                }
+
+                downloadClientPackageFile(targetFile)
+
+                if (!verifySha256Digest(expectedDigest, targetFile)) {
+                    throw IllegalStateException("SHA-256 digest mismatch on downloaded file $targetFile")
+                }
             }
-
-            downloadClientPackageFile(targetFile)
-
-            if (!verifySha256Digest(expectedDigest, targetFile)) {
-                throw IllegalStateException("SHA-256 digest mismatch on downloaded file $targetFile")
-            }
-
-        } catch (ex: Exception) {
-            logger.info("Deleting already-downloaded sha256sum file at {}", sha256SumFile)
-            sha256SumFile.delete()
-
-            if (targetFile.exists()) {
-                logger.info("Deleting already-downloaded release package file at {}", targetFile)
-                targetFile.delete()
-            }
-
-            throw ex
         }
     }
 
@@ -262,12 +257,10 @@ abstract class HelmDownloadClientPackage : DefaultTask() {
                         if (totalBytesTransferred >= nextProgressThreshold) {
                             nextProgressThreshold = minOf(contentLength, nextProgressThreshold + ProgressChunkSize)
 
-                            val progress = ((totalBytesTransferred * 1000) / contentLength).toDouble() / 10.0
+                            val progress = (totalBytesTransferred.toDouble() / contentLength) * percentRatio
                             logger.info(
-                                "Downloaded {} of {} ({})",
-                                formatDataSize(totalBytesTransferred),
-                                formatDataSize(contentLength),
-                                String.format("%.1f", progress)
+                                "Downloaded ${formatDataSize(totalBytesTransferred)} of ${formatDataSize(contentLength)} " +
+                                        "(${String.format("%.1f", progress)})"
                             )
                         }
                     }
