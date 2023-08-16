@@ -34,11 +34,13 @@ gradlePlugin {
             id = "com.citi.helm-commands"
             displayName = "Helm Commands plugin"
             implementationClass = "com.citi.gradle.plugins.helm.command.HelmCommandsPlugin"
+            description = "Wrapper for common helm commands"
         }
         create("helmPlugin") {
             id = "com.citi.helm"
             displayName = "Helm plugin"
             implementationClass = "com.citi.gradle.plugins.helm.HelmPlugin"
+            description = "Gradle plugin to help preparing Helm Charts. Supports charts packaging, linting, dependencies update, etc."
         }
     }
 }

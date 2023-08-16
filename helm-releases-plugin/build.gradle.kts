@@ -24,6 +24,7 @@ gradlePlugin {
             id = "com.citi.helm-releases"
             displayName = "Helm Releases Plugin"
             implementationClass = "com.citi.gradle.plugins.helm.release.HelmReleasesPlugin"
+            description = "Extension for Gradle Helm Plugin. Supports charts installation/uninstallation."
         }
     }
 }
