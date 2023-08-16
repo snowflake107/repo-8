@@ -35,12 +35,14 @@ gradlePlugin {
             displayName = "Helm Commands plugin"
             implementationClass = "com.citi.gradle.plugins.helm.command.HelmCommandsPlugin"
             description = "Wrapper for common helm commands"
+            tags.addAll("helm", "helm commands", "kubernetes", "k8s", "cloud")
         }
         create("helmPlugin") {
             id = "com.citi.helm"
             displayName = "Helm plugin"
             implementationClass = "com.citi.gradle.plugins.helm.HelmPlugin"
             description = "Gradle plugin to help preparing Helm Charts. Supports charts packaging, linting, dependencies update, etc."
+            tags.addAll("helm", "package", "kubernetes", "k8s", "cloud", "repository", "lint")
         }
     }
 }
