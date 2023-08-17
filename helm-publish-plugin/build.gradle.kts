@@ -37,6 +37,7 @@ gradlePlugin {
     plugins {
         create("helmPublishPlugin") {
             id = "com.citi.helm-publish"
+            displayName = "Helm Publish"
             implementationClass = "com.citi.gradle.plugins.helm.publishing.HelmPublishPlugin"
             description = "Extension for Gradle Helm Plugin. Allows helm chart publishing. Helm doesn't have this feature, so different publications are used for different helm repository providers"
             tags.addAll("helm", "publish")
