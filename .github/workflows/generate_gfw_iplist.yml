@@ -1,4 +1,6 @@
-name: generate_gfw_iplist
+name: generate gfw iplist
+permissions:
+  contents: write
 
 on:
   workflow_dispatch:
