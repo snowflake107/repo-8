@@ -14,7 +14,7 @@ jobs:
       - name: fetch batchresolv
         run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
       - name: generate ipv4list 
-        run: cat domainlist.txt | bash batchresolv.sh -s 1.1.1.1 -type AAAA -nthr 20 > v4list.txt
+        run: cat domainlist.txt | bash batchresolv.sh -s 1.1.1.1 -type A -nthr 20 > v4list.txt
       - uses: actions/upload-artifact@v3
         with:
           name: v4list.txt
