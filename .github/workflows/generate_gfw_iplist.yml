@@ -51,7 +51,7 @@ jobs:
       - name: fetch batchresolv
         run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
       - name: generate ipv4list 
-        run: cat chnlist.txt | bash batchresolv.sh -s 114.114.114.114 -type A -nthr 40 > chn_ipv4_list.txt
+        run: cat chnlist.txt | bash batchresolv.sh -s 223.5.5.5 -type A -nthr 40 > chn_ipv4_list.txt
       - uses: actions/upload-artifact@v3
         with:
           name: chn_ipv4_list.txt
@@ -68,7 +68,7 @@ jobs:
       - name: fetch batchresolv
         run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
       - name: generate ipv6list 
-        run: cat chnlist.txt | bash batchresolv.sh -s 114.114.114.114 -type AAAA -nthr 40 > chn_ipv6_list.txt
+        run: cat chnlist.txt | bash batchresolv.sh -s 223.5.5.5 -type AAAA -nthr 40 > chn_ipv6_list.txt
       - uses: actions/upload-artifact@v3
         with:
           name: chn_ipv6_list.txt
