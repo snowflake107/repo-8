@@ -8,44 +8,79 @@ on:
     - cron: "0 16 * * *"
   
 jobs:
-  generatev4:
+  generategfwv4:
     runs-on: ubuntu-latest
     steps:
-      - name: fetch gfwlist2dnsmasq
-        run: wget https://raw.githubusercontent.com/cokebar/gfwlist2dnsmasq/master/gfwlist2dnsmasq.sh
+      - name: fetch update-gfwlist.sh
+        run: wget https://raw.githubusercontent.com/zfl9/chinadns-ng/master/update-gfwlist.sh
       - name: generate gfw domain list
-        run: bash gfwlist2dnsmasq.sh -l -o domainlist.txt
+        run: bash update-gfwlist.sh
       - name: fetch batchresolv
         run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
       - name: generate ipv4list 
-        run: cat domainlist.txt | bash batchresolv.sh -s 1.1.1.1 -type A -nthr 20 > v4list.txt
+        run: cat gfwlist.txt | bash batchresolv.sh -s 1.1.1.1 -type A -nthr 40 > gfw_ipv4_list.txt
       - uses: actions/upload-artifact@v3
         with:
-          name: v4list.txt
-          path: v4list.txt
+          name: gfw_ipv4_list.txt
+          path: gfw_ipv4_list.txt
           if-no-files-found: error 
           
-  generatev6:
+  generategfwv6:
     runs-on: ubuntu-latest
     steps:
-      - name: fetch gfwlist2dnsmasq
-        run: wget https://raw.githubusercontent.com/cokebar/gfwlist2dnsmasq/master/gfwlist2dnsmasq.sh
+      - name: fetch update-gfw.list.sh
+        run: wget https://raw.githubusercontent.com/zfl9/chinadns-ng/master/update-gfwlist.sh
       - name: generate gfw domain list
-        run: bash gfwlist2dnsmasq.sh -l -o domainlist.txt
+        run: bash update-gfwlist.sh
       - name: fetch batchresolv
         run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
       - name: generate ipv6list 
-        run: cat domainlist.txt | bash batchresolv.sh -s 1.1.1.1 -type AAAA -nthr 20 > v6list.txt
+        run: cat gfwlist.txt | bash batchresolv.sh -s 1.1.1.1 -type AAAA -nthr 40 > gfw_ipv6_list.txt
       - uses: actions/upload-artifact@v3
         with:
-          name: v6list.txt
-          path: v6list.txt
+          name: gfw_ipv6_list.txt
+          path: gfw_ipv6_list.txt
+          if-no-files-found: error
+  generatechnv4:
+    runs-on: ubuntu-latest
+    steps:
+      - name: fetch update-chnlist.sh
+        run: wget https://raw.githubusercontent.com/zfl9/chinadns-ng/master/update-chnlist.sh
+      - name: generate cn domain list
+        run: bash update-chnlist.sh
+      - name: fetch batchresolv
+        run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
+      - name: generate ipv4list 
+        run: cat chnlist.txt | bash batchresolv.sh -s 114.114.114.114 -type A -nthr 40 > chn_ipv4_list.txt
+      - uses: actions/upload-artifact@v3
+        with:
+          name: chn_ipv4_list.txt
+          path: chn_ipv4_list.txt
+          if-no-files-found: error 
+          
+  generatechnv6:
+    runs-on: ubuntu-latest
+    steps:
+      - name: fetch update-chnlist.sh
+        run: wget https://raw.githubusercontent.com/zfl9/chinadns-ng/master/update-chnlist.sh
+      - name: generate gfw domain list
+        run: bash update-gfwlist.sh
+      - name: fetch batchresolv
+        run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
+      - name: generate ipv6list 
+        run: cat chnlist.txt | bash batchresolv.sh -s 114.114.114.114 -type AAAA -nthr 40 > chn_ipv6_list.txt
+      - uses: actions/upload-artifact@v3
+        with:
+          name: chn_ipv6_list.txt
+          path: chn_ipv6_list.txt
           if-no-files-found: error
   release:
     runs-on: ubuntu-latest
     needs:
-      - generatev4
-      - generatev6
+      - generategfwv4
+      - generategfwv6
+      - generatechnv4
+      - generatechnv6
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
@@ -61,15 +96,23 @@ jobs:
       
       - uses: actions/download-artifact@v3
         with: 
-          name: v4list.txt
+          name: gfw_ipv4_list.txt
       - uses: actions/download-artifact@v3
         with:
-          name: v6list.txt
+          name: gfw_ipv6_list.txt
+      - uses: actions/download-artifact@v3
+        with:
+          name: chn_ipv6_list.txt
+      - uses: actions/download-artifact@v3
+        with:
+          name: chn_ipv6_list.txt
 
       - uses: softprops/action-gh-release@v1
         with:
           files: |
-            v4list.txt
-            v6list.txt
+            gfw_ipv4_list.txt
+            gfw_ipv6_list.txt
+            chn_ipv4_list.txt
+            chn_ipv6_list.txt
           name: ${{ steps.date.outputs.date }}
           tag_name: ${{ steps.previous_tag.outputs.tag }}
