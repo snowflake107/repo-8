@@ -54,9 +54,15 @@ jobs:
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Get Previous tag
+        id: previous_tag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: 0.1
       - uses: softprops/action-gh-release@v1
         with:
           files: |
             v4list.txt
             v6list.txt
           name: ${{ steps.date.outputs.date }}
+          tag_name: ${{ steps.previous_tag.outputs.tag }}
