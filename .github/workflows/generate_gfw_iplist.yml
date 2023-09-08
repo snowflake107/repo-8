@@ -64,7 +64,7 @@ jobs:
       - name: fetch update-chnlist.sh
         run: wget https://raw.githubusercontent.com/zfl9/chinadns-ng/master/update-chnlist.sh
       - name: generate gfw domain list
-        run: bash update-gfwlist.sh
+        run: bash update-chnlist.sh
       - name: fetch batchresolv
         run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
       - name: generate ipv6list 
