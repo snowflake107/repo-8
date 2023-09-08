@@ -14,14 +14,12 @@ jobs:
       - name: fetch batchresolv
         run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
       - name: generate ipv4list 
-        run: cat domainlist.txt | bash batchresolv.sh -s 8.8.8.8 -type A -nthr 10 > v4list.txt
-      - name: show v4list
-        run: cat v4list.txt
-      - uses: actions/upload-artifact@v3
-        with:
-          name: v4list.txt
-          path: v4list.txt
-          if-no-files-found: error 
+        run: cat domainlist.txt | bash batchresolv.sh -s 8.8.8.8 -type A -nthr 10 
+      # - uses: actions/upload-artifact@v3
+      #   with:
+      #     name: v4list.txt
+      #     path: v4list.txt
+      #     if-no-files-found: error 
           
   generatev6:
     runs-on: ubuntu-latest
