@@ -13,6 +13,8 @@ jobs:
         run: bash gfwlist2dnsmasq.sh -l -o domainlist.txt
       - name: fetch batchresolv
         run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
+      - name: check resolve
+        run: dig 000webhost.com @1.1.1.1 -type A
       - name: generate ipv4list 
         run: cat domainlist.txt
       # - uses: actions/upload-artifact@v3
