@@ -36,4 +36,22 @@ jobs:
         with:
           name: v6list.txt
           path: v6list.txt
-          if-no-files-found: error 
+          if-no-files-found: error
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with: 
+          name: v4list.txt
+      - uses: actions/downlaod-artifact@v3
+        with:
+          name: v6list.txt
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            v4list.txt
+            v6list.txt
+          name: ${{ steps.date.outputs.date }}
