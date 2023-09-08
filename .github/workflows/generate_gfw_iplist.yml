@@ -45,20 +45,25 @@ jobs:
       - generatev4
       - generatev6
     steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: Get Previous tag
+        id: previous_tag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: 0.1
+      
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      
       - uses: actions/download-artifact@v3
         with: 
           name: v4list.txt
       - uses: actions/download-artifact@v3
         with:
           name: v6list.txt
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-      - name: Get Previous tag
-        id: previous_tag
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
-        with:
-          fallback: 0.1
+
       - uses: softprops/action-gh-release@v1
         with:
           files: |
