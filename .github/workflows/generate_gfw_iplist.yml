@@ -2,6 +2,8 @@ name: generate_gfw_iplist
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 16 * * *"
   
 jobs:
   generatev4:
@@ -39,11 +41,14 @@ jobs:
           if-no-files-found: error
   release:
     runs-on: ubuntu-latest
+    needs:
+      - generatev4
+      - generatev6
     steps:
       - uses: actions/download-artifact@v3
         with: 
           name: v4list.txt
-      - uses: actions/downlaod-artifact@v3
+      - uses: actions/download-artifact@v3
         with:
           name: v6list.txt
       - name: Get current date
