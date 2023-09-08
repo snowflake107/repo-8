@@ -1,0 +1,39 @@
+name: generate_gfw_iplist
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  generatev4:
+    runs-on: ubuntu-latest
+    steps:
+      - name: fetch gfwlist2dnsmasq
+        run: wget https://raw.githubusercontent.com/cokebar/gfwlist2dnsmasq/master/gfwlist2dnsmasq.sh
+      - name: generate gfw domain list
+        run: bash gfwlist2dnsmasq.sh -l -o domainlist.txt
+      - name: fetch batchresolv
+        run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
+      - name: generate ipv4list 
+        run: cat domainlist.txt | bash batchresolv.sh -s 1.1.1.1 -nthr 10 > v4list.txt
+      - uses: actions/upload-artifact@v3
+        with:
+          name: v4list.txt
+          path: v4list.txt
+          if-no-files-found: error 
+          
+  generatev6:
+    runs-on: ubuntu-latest
+    steps:
+      - name: fetch gfwlist2dnsmasq
+        run: wget https://raw.githubusercontent.com/cokebar/gfwlist2dnsmasq/master/gfwlist2dnsmasq.sh
+      - name: generate gfw domain list
+        run: bash gfwlist2dnsmasq.sh -l -o domainlist.txt
+      - name: fetch batchresolv
+        run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
+      - name: generate ipv6list 
+        run: cat domainlist.txt | bash batchresolv.sh -s 1.1.1.1 -type AAAA -nthr 10 > v6list.txt
+      - uses: actions/upload-artifact@v3
+        with:
+          name: v6list.txt
+          path: v6list.txt
+          if-no-files-found: error 
