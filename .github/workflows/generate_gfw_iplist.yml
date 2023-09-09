@@ -102,7 +102,7 @@ jobs:
           name: gfw_ipv6_list.txt
       - uses: actions/download-artifact@v3
         with:
-          name: chn_ipv6_list.txt
+          name: chn_ipv4_list.txt
       - uses: actions/download-artifact@v3
         with:
           name: chn_ipv6_list.txt
