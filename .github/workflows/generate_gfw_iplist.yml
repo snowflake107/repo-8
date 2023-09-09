@@ -41,46 +41,11 @@ jobs:
           name: gfw_ipv6_list.txt
           path: gfw_ipv6_list.txt
           if-no-files-found: error
-  generatechnv4:
-    runs-on: ubuntu-latest
-    steps:
-      - name: fetch update-chnlist.sh
-        run: wget https://raw.githubusercontent.com/zfl9/chinadns-ng/master/update-chnlist.sh
-      - name: generate cn domain list
-        run: bash update-chnlist.sh
-      - name: fetch batchresolv
-        run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
-      - name: generate ipv4list 
-        run: cat chnlist.txt | bash batchresolv.sh -s 223.5.5.5 -type A -nthr 40 > chn_ipv4_list.txt
-      - uses: actions/upload-artifact@v3
-        with:
-          name: chn_ipv4_list.txt
-          path: chn_ipv4_list.txt
-          if-no-files-found: error 
-          
-  generatechnv6:
-    runs-on: ubuntu-latest
-    steps:
-      - name: fetch update-chnlist.sh
-        run: wget https://raw.githubusercontent.com/zfl9/chinadns-ng/master/update-chnlist.sh
-      - name: generate gfw domain list
-        run: bash update-chnlist.sh
-      - name: fetch batchresolv
-        run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
-      - name: generate ipv6list 
-        run: cat chnlist.txt | bash batchresolv.sh -s 223.5.5.5 -type AAAA -nthr 40 > chn_ipv6_list.txt
-      - uses: actions/upload-artifact@v3
-        with:
-          name: chn_ipv6_list.txt
-          path: chn_ipv6_list.txt
-          if-no-files-found: error
   release:
     runs-on: ubuntu-latest
     needs:
       - generategfwv4
       - generategfwv6
-      - generatechnv4
-      - generatechnv6
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
@@ -100,19 +65,11 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: gfw_ipv6_list.txt
-      - uses: actions/download-artifact@v3
-        with:
-          name: chn_ipv4_list.txt
-      - uses: actions/download-artifact@v3
-        with:
-          name: chn_ipv6_list.txt
 
       - uses: softprops/action-gh-release@v1
         with:
           files: |
             gfw_ipv4_list.txt
             gfw_ipv6_list.txt
-            chn_ipv4_list.txt
-            chn_ipv6_list.txt
           name: ${{ steps.date.outputs.date }}
           tag_name: ${{ steps.previous_tag.outputs.tag }}
