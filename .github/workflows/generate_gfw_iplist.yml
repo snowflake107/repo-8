@@ -18,7 +18,7 @@ jobs:
       - name: fetch batchresolv
         run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
       - name: generate ipv4list 
-        run: cat gfwlist.txt | bash batchresolv.sh -s 1.1.1.1 -type A -nthr 40 > gfw_ipv4_list.txt
+        run: cat gfwlist.txt | bash batchresolv.sh -s 1.1.1.1 -type A -nthr 40 | sort | uniq > gfw_ipv4_list.txt
       - uses: actions/upload-artifact@v3
         with:
           name: gfw_ipv4_list.txt
@@ -35,7 +35,7 @@ jobs:
       - name: fetch batchresolv
         run: wget https://raw.githubusercontent.com/hehaorui/utilities/main/scripts/batchresolv.sh
       - name: generate ipv6list 
-        run: cat gfwlist.txt | bash batchresolv.sh -s 1.1.1.1 -type AAAA -nthr 40 > gfw_ipv6_list.txt
+        run: cat gfwlist.txt | bash batchresolv.sh -s 1.1.1.1 -type AAAA -nthr 40 | sort | unqi > gfw_ipv6_list.txt
       - uses: actions/upload-artifact@v3
         with:
           name: gfw_ipv6_list.txt
