@@ -5,6 +5,9 @@ export README_TEMPLATE_FILE ?= $(BUILD_HARNESS_PATH)/templates/README.md.gotmpl
 export README_TEMPLATE_YAML := $(if $(findstring http,$(README_YAML)),$(README_YAML),$(BUILD_HARNESS_PATH)/templates/$(README_YAML))
 export README_INCLUDES ?= $(file://$(shell pwd)/?type=text/plain)
 
+INSTALL_PATH ?= $(BUILD_HARNESS_PATH)/vendor
+GOMPLATE ?= $(INSTALL_PATH)/gomplate
+
 ## Alias for readme/build
 readme: readme/build
 	@exit 0
@@ -29,6 +32,6 @@ readme/lint:
 
 ## Create README.md by building it from README.yaml
 readme/build: readme/deps $(README_DEPS)
-	@gomplate --file $(README_TEMPLATE_FILE) \
+	@$(GOMPLATE) --file $(README_TEMPLATE_FILE) \
 		--out $(README_FILE)
 	@echo "Generated $(README_FILE) from $(README_TEMPLATE_FILE) using data from $(README_TEMPLATE_YAML)"
