@@ -146,7 +146,7 @@ subprojects {
         val githubUrl = project.extra["github.url"] as String
 
         with(the<GradlePluginDevelopmentExtension>()) {
-            website.set("https://citi.github.io/projects/gradle-helm-plugin/")
+            website.set("https://citi.github.io/gradle-helm-plugin/")
             vcsUrl.set(githubUrl)
             description = "A suite of Gradle plugins for building, publishing and managing Helm charts."
             plugins.forEach {plugin ->
