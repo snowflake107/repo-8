@@ -4,7 +4,7 @@ This page describes how to publish a new version of plugin and all related artif
 
 Steps:
 
-1. Create a PR with version increment in [gradle.properties](../gradle.properties). Please follow [semver guidelines](https://semver.org/):
+1. Create a PR with version increment in [gradle.properties](../gradle.properties) and in [documentation](../README.adoc). Please follow [semver guidelines](https://semver.org/):
    1. If there are breaking `.api` files - increment the major version (e.g. from `x.y.z` to `x+1.0.0`)
    2. If current version is compatible with previous one and there are some notable changes - please increment the minor one (e.g. from `x.y.z` to `x.y+1.0`)
    3. Otherwise - please increment the patch version (e.g. from `x.y.z` to `x.y.z+1`).
