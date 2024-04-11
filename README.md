@@ -22,8 +22,6 @@
 
 ## Features
 
-<br />
-
 - Gradle task types for common Helm CLI commands
 
 - Build, package and publish Helm Charts using a declarative Gradle DSL
@@ -33,8 +31,6 @@
 - Resolve dependencies between charts using Gradle artifact dependencies
 
 - Install, upgrade and uninstall releases to/from a Kubernetes cluster
-
-<br/>
 
 ## Quick Start
 
@@ -87,13 +83,9 @@ Please review our [community contribution guidelines](https://github.com/Citi/.g
 
 We are committed to making open source an enjoyable and respectful experience for our community. See <a href="https://github.com/Citi/.github/blob/main/CODE_OF_CONDUCT.md"><code>CODE_OF_CONDUCT</code></a> for more information.
 
-<br />
-
 ## License
 
 This project is distributed under the [MIT License](https://opensource.org/license/mit). See <a href="./LICENSE"><code>LICENSE</code></a> for more information.
-
-<br />
 
 ## Contact
 
