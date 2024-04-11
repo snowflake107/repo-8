@@ -6,7 +6,7 @@
   <h3 align="center">Citi/gradle-helm-plugin</h3>
 
   <p align="center">
-    This is a suite of Gradle Plugins for <br />building, publishing and managing <a href="https://www.helm.sh">Helm</a> Charts
+    A suite of Gradle Plugins for <br />building, publishing and managing <a href="https://www.helm.sh">Helm</a> Charts
     <br />
   </p>
 
