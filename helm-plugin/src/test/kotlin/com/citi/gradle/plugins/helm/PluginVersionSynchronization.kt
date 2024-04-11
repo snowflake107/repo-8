@@ -15,7 +15,7 @@ class PluginVersionSynchronization {
         val pluginVersion = getPluginVersion()
         val expectedDocumentationLine = ":version: $pluginVersion"
 
-        val readmeFile = File("../README.adoc").absoluteFile.readText()
+        val readmeFile = File("../README.md").absoluteFile.readText()
 
         readmeFile shouldContain expectedDocumentationLine
     }
