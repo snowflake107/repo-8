@@ -81,11 +81,11 @@ Please review our [community contribution guidelines](https://github.com/Citi/.g
 
 ## Code of Conduct
 
-We are committed to making open source an enjoyable and respectful experience for our community. See <a href="https://github.com/Citi/.github/blob/main/CODE_OF_CONDUCT.md"><code>CODE_OF_CONDUCT</code></a> for more information.
+We are committed to making open source an enjoyable and respectful experience for our community. See [`CODE_OF_CONDUCT`](https://github.com/Citi/.github/blob/main/CODE_OF_CONDUCT.md) for more information.
 
 ## License
 
-This project is distributed under the [MIT License](https://opensource.org/license/mit). See <a href="./LICENSE"><code>LICENSE</code></a> for more information.
+This project is distributed under the [MIT License](https://opensource.org/license/mit). See [`LICENSE`](./LICENSE) for more information.
 
 ## Contact
 
