@@ -13,9 +13,9 @@ class PluginVersionSynchronization {
     @Test
     fun pluginVersionShouldBeTheSameWithDocumentation() {
         val pluginVersion = getPluginVersion()
-        val expectedDocumentationLine = ":version: $pluginVersion"
+        val expectedDocumentationLine = "$pluginVersion"
 
-        val readmeFile = File("../README.adoc").absoluteFile.readText()
+        val readmeFile = File("../README.md").absoluteFile.readText()
 
         readmeFile shouldContain expectedDocumentationLine
     }
