@@ -38,13 +38,13 @@ Add `com.citi.helm` to your Gradle project:
 
 ```gradle
 plugins {
-    id 'com.citi.helm' version '2.1.0'
+    id 'com.citi.helm' version '2.2.0'
 }
 ```
 
 ```gradle
 plugins {
-    id("com.citi.helm") version "2.1.0"
+    id("com.citi.helm") version "2.2.0"
 }
 ```
 
