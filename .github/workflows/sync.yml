@@ -19,4 +19,4 @@ jobs:
         github_repository: "${GITHUB_REPOSITORY}"
         github_token: ${{ secrets.WORKFLOW_TOKEN }}
         upstream_repo: debezium/debezium
-        major_version: "2"
+        version_regex: "^v2\\.[0-9]+\\.[0-9]+\\.Final$"
