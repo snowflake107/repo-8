@@ -17,7 +17,7 @@ jobs:
       # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle#using-the-gradle-starter-workflow
       - name: Branch Check
         if: github.ref != 'refs/heads/master'
-        uses: actions/github-script@v3
+        uses: actions/github-script@v7
         with:
           script: |
             core.setFailed('This workflow must run on master branch only')
