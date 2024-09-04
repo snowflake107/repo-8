@@ -1,4 +1,4 @@
-FROM golang:1.15.11-alpine3.13
+FROM golang:1.17.3-alpine3.13
 
 LABEL "com.github.actions.name"="Build Harness"
 LABEL "com.github.actions.description"="Run any build-harness make target"
