@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout source code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Prepare tags for Docker image
       if: (github.event_name == 'release' && github.event.action == 'created') || github.event.pull_request.head.repo.full_name == github.repository || github.event_name == 'schedule'
