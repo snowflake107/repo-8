@@ -30,7 +30,7 @@ RUN apk --update --no-cache add \
       cryptography==43.0.1 \
       awscli==1.31.13 \
       boto3==1.33.13 \
-      PyGithub==2.30 && \
+      PyGithub==2.3.0 && \
     git config --global advice.detachedHead false
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
