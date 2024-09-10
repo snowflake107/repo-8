@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Auto-Assign Action
-        uses: lkcozy/auto-assign-reviewer-by-issuer
+        uses: lkcozy/auto-assign-reviewer-by-issuer@main
         with:
           config: .github/reviewers.yml
           token: ${{ secrets.GITHUB_TOKEN }}
