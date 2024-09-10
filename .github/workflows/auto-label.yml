@@ -8,7 +8,11 @@ jobs:
   components:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/labeler@v5.0.0
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Auto-Assign Labels
+        uses: actions/labeler@v5.0.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           configuration-path: .github/auto-label.yml

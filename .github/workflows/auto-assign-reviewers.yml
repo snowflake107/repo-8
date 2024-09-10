@@ -8,7 +8,11 @@ jobs:
   assign:
     runs-on: ubuntu-latest
     steps:
-      - uses: shufo/auto-assign-reviewer-by-issuer@v1.0.0
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Auto-Assign Action
+        uses: lkcozy/auto-assign-reviewer-by-issuer
         with:
           config: .github/reviewers.yml
           token: ${{ secrets.GITHUB_TOKEN }}
