@@ -35,9 +35,9 @@ require (
 	github.com/zinclabs/wal v1.2.4
 	go.etcd.io/bbolt v1.3.6
 	go.etcd.io/etcd/client/v3 v3.5.4
-	golang.org/x/crypto v0.0.0-20220722155217-630584e8d5aa
-	golang.org/x/sync v0.0.0-20220601150217-0de741cfad7f
-	golang.org/x/text v0.3.7
+	golang.org/x/crypto v0.28.0
+	golang.org/x/sync v0.8.0
+	golang.org/x/text v0.19.0
 )
 
 replace github.com/blugelabs/bluge => github.com/zinclabs/bluge v1.1.5
