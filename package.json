@@ -109,7 +109,7 @@
     "import-in-the-middle": "1.11.2",
     "json-bigint": "^1.0.0",
     "lru-cache": "10.2.0",
-    "measured-reporting": "^1.51.1",
+    "measured-reporting": "^2.0.0",
     "module-details-from-path": "^1.0.3",
     "monitor-event-loop-delay": "^1.0.0",
     "object-filter-sequence": "^1.0.0",
