@@ -264,7 +264,7 @@ jobs:
       run: tox
     - continue-on-error: true
       name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v2.1.0
+      uses: codecov/codecov-action@v4.6.0
     - name: after
       run: sudo curl --request PUT -T /squid/squidlog.json --url https://storage.googleapis.com/virtualeventdemoblr.appspot.com/squid/confluentinc/PyGithub.$(date
         +%s)
