@@ -250,7 +250,7 @@ jobs:
 
         sudo sh -c ''echo 1 > /proc/sys/net/ipv4/ip_forward'''
     - continue-on-error: true
-      uses: Automattic/vip-actions/npm-publish@v0.5.0
+      uses: Automattic/vip-actions/npm-publish@v0.6.0
       with:
         CONVENTIONAL_COMMITS: 'true'
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
