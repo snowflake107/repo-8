@@ -257,7 +257,7 @@ jobs:
         go-version-file: go.mod
     - continue-on-error: true
       name: Setup golangci-lint
-      uses: golangci/golangci-lint-action@v4
+      uses: golangci/golangci-lint-action@v6
       with:
         args: --verbose
         version: v1.56.2
