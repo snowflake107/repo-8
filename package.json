@@ -116,7 +116,7 @@
     "object-identity-map": "^1.0.2",
     "original-url": "^1.2.3",
     "pino": "^8.15.0",
-    "readable-stream": "^3.6.2",
+    "readable-stream": "^4.5.2",
     "relative-microtime": "^2.0.0",
     "require-in-the-middle": "^7.1.1",
     "semver": "^7.5.4",
