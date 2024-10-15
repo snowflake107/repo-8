@@ -96,7 +96,7 @@ evcxr = ["svg_backend"]
 deprecated_items = [] # Keep some of the deprecated items for backward compatibility
 
 [dev-dependencies]
-itertools = "0.10.0"
+itertools = "0.13.0"
 criterion = "0.3.4"
 rayon = "1.5.1"
 serde_json = "1.0.64"
