@@ -9,7 +9,7 @@ require (
 	github.com/Azure/go-autorest/autorest v0.11.27
 	github.com/Azure/go-autorest/autorest/azure/auth v0.5.12
 	github.com/Masterminds/sprig v2.22.0+incompatible
-	github.com/alexkappa/mustache v0.0.0-20191113130723-8bb9cfca2bfa
+	github.com/alexkappa/mustache v1.0.0
 	github.com/arkadijs/golang-socketio v0.0.0-20180405140456-dc2d2a43165c
 	github.com/aws/aws-sdk-go v1.55.5
 	github.com/go-git/go-git/v5 v5.12.0
