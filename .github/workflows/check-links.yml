@@ -251,7 +251,7 @@ jobs:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       id: lychee
       name: Link Checker
-      uses: lycheeverse/lychee-action@v1.6.1
+      uses: lycheeverse/lychee-action@v2.0.2
       with:
         args: --verbose --no-progress --exclude-mail './**/*.md' './**/*.html'
     - continue-on-error: true
