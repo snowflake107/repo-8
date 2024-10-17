@@ -255,7 +255,7 @@ jobs:
         php-version: '8.0'
     - continue-on-error: true
       name: Install composer dependencies
-      uses: ramsey/composer-install@v2
+      uses: ramsey/composer-install@v3
     - continue-on-error: true
       name: Run PHPStan
       run: ./vendor/bin/phpstan --error-format=github
